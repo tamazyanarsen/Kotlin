@@ -5,7 +5,6 @@ import tornadofx.*
 
 import com.dls.jpos.common.*
 import com.dls.jpos.interpretation.*
-
 import jpos.*
 import jpos.events.*
 
@@ -18,8 +17,12 @@ class MainView : View("Hello TornadoFX") {
         hbox {
             button("Open") {
                 action {
-                    val res = scanner.open("COM7")
-                    println("result: $res")
+                    try {
+                        val res = scanner.open("DLS-Magellan-RS232-Scanner-2200")
+                        println("result: $res")
+                    } catch (jp: JposException) {
+                        println("was exception: $jp")
+                    }
                 }
             }
             button("Close") {
